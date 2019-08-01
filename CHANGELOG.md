@@ -59,6 +59,11 @@
 - MBR-319 - change Message Element Name from NS to CA; resolve `dosageInstruction/@moodCode` value
 
 
+## [1.5.9]
+### Added
+- CDA support
+
+
 ## [1.5.8.1]
 ### Added
 - The following new HL7v3 releases are now supported in Message Builder:
@@ -260,13 +265,13 @@ filters based on <propertyBasedContent>
 
 ## [1.3.0]
 ### Fixed
-11271 - NullPointerException if unit of measure is null
-11293 - `use="BUS"` for MR2009 id fields.
-11294 - Null Pointer exceptions thrown out of the Validate method
-11384 - MIF annotations on interactions not picked up when processing MIFv2s
-11385 - Interaction model has duplicated business name field
-11386 - MIFv1 annotations not processed properly - subtypes are missing
-11393 - Core Message Builder project tests fail when run with time zones other than EST
+- 11271 - NullPointerException if unit of measure is null
+- 11293 - `use="BUS"` for MR2009 id fields.
+- 11294 - Null Pointer exceptions thrown out of the Validate method
+- 11384 - MIF annotations on interactions not picked up when processing MIFv2s
+- 11385 - Interaction model has duplicated business name field
+- 11386 - MIFv1 annotations not processed properly - subtypes are missing
+- 11393 - Core Message Builder project tests fail when run with time zones other than EST
 
 
 ## [1.2.9]
@@ -275,3 +280,81 @@ filters based on <propertyBasedContent>
   - We have discovered that there is an error in the previous releases of Infoway Message Builder SK API: the version of CeRX 4.3 used to generate the SK API distributed on the EMR & Integration Wiki (Hotfix 3) is different from the actual version in use by Saskatchewan (Hotfix 2). This error is now corrected in this release. For your convenience, attached "CeRx-EN-Release Notes - V01R04.3 - HOTFIX 3 - 20080814.pdf" is the change log for Hotfix 3. You may wish to review and determine whether this issue will impact you.
   - Please replace your previous release of Message Builder SK API with this release and use SpecificationVersion.V01R04_2_SK instead of SpecificationVersion.V01R04_3_SK in your implementation code.
 - 11271 - Fixed NullPointerException when adding physical quanitities using MessageBuilder and the unit of measure is null
+
+
+## [1.2.8]
+### Added
+- The first official release of the Message Builder AB API, providing support for AB Provincial Client Registry (MR2007 V02R02) and Session Management.
+
+
+### Changed
+- An updated release of the Message Builder SK API, containing mostly annotation and javadoc changes. Minimal impact is expected for those who upgrade from the previous release of Message Builder.
+- 11087 - V01R04.3 API re-generated
+- 11078 - V02R01 API re-generated
+- 11077 - V02R02 API re-generated
+
+
+### Fixed
+- 10239 - Creation Time value with 3 digits for millisecond now supported via system property using `"messagebuilder.date.format.override.<INSERT_SPECIFIC_VERSION_HERE>"`
+
+
+## [1.2.7]
+### Added
+- Support SK CeRx V01R04.3
+  - For the Message Builder SK API, the following two constraints were applied by SK which are not included yet in this release of Message Builder (and we are planning to include them in the next release). Therefore, please take notice of them during development:
+    - Not allowed to set `ServiceLocationBean` (which is part of the `ca.infoway.messagebuilder.model.sk_cerx_v01_r04_3.common.coct_mt240003ca` package) as the `Recipient` in `ConsentGivenToBean` (which is part of `ca.infoway.messagebuilder.model.sk_cerx_v01_r04_3.merged` package)
+    - The `id` attribute in `ObservationEventBean` (which is part of `ca.infoway.messagebuilder.model.sk_cerx_v01_r04_3.iehr.merged` package) has been constrained by SK to "NOT ALLOWED". This means that it will not be emitted in xml nor accepted from xml (even though it is available to set via the Message Builder API, as the class that contains it has been merged with a number of nearly identical classes which do allow the `id` field) .
+- Support pCS MR2009 R02.04.03
+
+
+### Fixed
+- 10965 Missing sender sub-elements in some complex cases (AB Session Management messages in particular)
+- 10983 Re-generate SK API
+- 10990 Relax `II` validation constraints for AB (`SpecializationType` no longer required for `II` fields)
+
+
+## [1.2.6]
+### Added
+- 10266 Support pCS MR2009 R02.04.03
+- 10293 Create an official release for AB Session Managment API
+
+
+### Changed
+- 1228 Update tutorial applications and related documents
+- 1242 Updating hello_world guide and code
+
+
+### Fixed
+- 488 ControlActEvent -> EventType for MedicationPrescriptionDetailQuery (PORX_IN060370CA)
+- 1239 hello_world example - NullPointerException in FindCandidatesApp using REST
+- 1240 hello_world example - FindCandidatesApp failed to receive a response when using SOAP
+- 1466 Setting SpecializationType to a collection object
+- 1561 INT.NONNEG Value is changed to 0 if a negative number is given
+- 1562 INT.POS Value is not set and no warning/error if a negative number is given
+- 1570 PQ.Basic truncation provides no way to know what was the original value
+- 1624 [SASK feature] Timezone can cause problems in general, and with TS.FULLDATE in particular
+- 2159 Question - Generate MB API using HL7 model element name (option #3) as the default option ?
+- 10245 Duplicate fingerprint found in AB Session Managment messages
+- 10284 ValueHolder does not work in Message builder v1.2.5
+- 10285 MANIFEST.MF is missing the "Implementation-Version" property in the Message Builder hl7v3 releases
+
+## [1.2.5]
+### Changed
+- All APIs have been re-built using HL7 element names, instead of HL7 business names. Note, this change applies to attributes and methods only while class names still use HL7 business names to reduce ambiguity. This change, in response to user feedback, means for quicker development and makes resulting code more consistent with HL7 specifications and other resources which tend to use HL7 element names for specification.
+
+
+### Fixed
+- 2159 Generate MB API using HL7 model element name (option #3) as the default option
+
+
+## [1.2.0]
+### Fixed
+- 654 (.NET)System.NotImplementedException: The method or operation is not implemented.
+- 649 (.NET)Validator - Can't determine the domain type of .
+- 600 (.NET)Could not read messageSet_r02_04_02.xml
+- 594 (.NET)AbstractPivlPropertyFormatter.cs - Unreachable code
+- 586 Missing dlls for releases other than MR2009
+- 585 paragraph tags in comments (.NET) are unclosed
+- 492 Expected mandatory attribute "specializationType" (Aversan)
+- 482 Runtime exception trying to parse a generated BC Find Candidates message
+- 427 New Issue: No support for `BAG<AD>`
