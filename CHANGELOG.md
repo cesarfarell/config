@@ -159,10 +159,119 @@ filters based on <propertyBasedContent>
 - 15929 - MB-generated message does not pass XSD validation [IVL and URG inner elements did not have the correct xsi:type]
 
 
-## Removed
+### Removed
 - 14626 - Drop support for MR2007 V02R01 in Message Builder
 
 
 ## [1.4.6]
-HERE I AM!!
+### Added
+- Runtime and Generator support for .NET
+- Sample .Net project
 
+
+## [1.4.5]
+### Added
+- Infoway public Maven repository created.  As an option, you can now use Maven to install Message Builder. Please refer to the Download page for more details.
+
+
+### Changed
+- JavaDoc API documentation improvements (including the addition of Class diagrams)
+- New User Guide released with more information, guidance, and tips.
+- The message validator in Message Builder has been greatly improved and is more "strict" in accordance with with Infoway datatype specifications. As a result, you may notice more validation errors being reported by Message Builder than before.
+- The following classes were moved from `ca.infoway.messagebuilder.datatype.lang` and placed in `ca.infoway.messagebuilder.datatype.lang.util`:
+  - `Compression`
+  - `Currency`
+  - `NamePartType`
+  - `OrganizationNamePartType`
+  - `PersonNamePartType`
+  - `PostalAddressPartType`
+  - `Representation`
+  - `SetOperator`
+- The following classes were moved from `ca.infoway.messagebuilder.datatype.lang` and placed in `ca.infoway.messagebuilder.domainvalue.basic`:
+  - `Country`
+  - `DefaultTimeUnit`
+  - `EntityNameUse`
+  - `MediaType`
+  - `PostalAddressUse`
+  - `TelecommunicationAddressUse`
+  - `UnitsOfMeasureCaseSensitive`
+  - `URLScheme`
+
+
+### Fixed
+- 14145 - MBT does not allow use attribute of PN.BASIC datatype to be specified in CeRx standard
+
+
+## [1.4.3]
+### Changed
+- Internal release only
+- Minor micellaneous improvements
+
+## [1.4.2]
+### Changed
+- Internal release only
+
+
+### Fixed
+- 13398 - Message Builder Validator is not reporting certain validations
+- 13365 - HL7Error class never displays error path
+
+
+## [1.4.1]
+### Changed
+- Internal release only
+
+
+## [1.4.0]
+### Changed
+- This release incorporates massive changes to the entire MB validation mechanism (for marshalling and unmarshalling).
+- Specifying a version (via the VersionNumber interface) has changed to use a new Hl7BaseVersion enum
+- 11316 - Refactor Message Builder datatype validation
+
+
+### Fixed
+- 11430 - [DATATYPE] MBT MR2009 Runtime coremif mismatch.
+- 11372 - [DATATYPE] MBT does not validate the II.PUBLIC datatype correctly
+- 11322 - [DATATYPE] MBT does not validate various definitions of the AD.BASIC datatype for both CeRx4.3 and MR2009
+- 11302 - Ensure lack of coding strength from MIFv2s won't cause problems when marshalling/unmarshalling
+- 11297 - [DATATYPE] MBT does not validate various definitions of the PN.BASIC datatype for CeRx4.3
+- 11296 - [DATATYPE] MBT does not pick up administrativeGenderCode being null as a problem.
+- 11267 - [DATATYPE] Validator gaps (was FW: Mif or MBT CeRx problems)
+- 717 - Need to finalize a process for ensuring that we have interfaces for all Domain Values
+
+
+## [1.3.4.1]
+### Added
+- Added RimClass To MessagePart
+- Added Vocabulary Mif processing
+- Generation of Vocabulary Classes (C# and java)
+- Added ConformanceLevel.IGNORED (as not allowed and as optional)
+
+
+### Fixed
+- Expanded AnnotationType to include missing types
+
+
+## [1.3.1]
+### Fixed
+- 11455 - NullPointerException if unit of measure is null from code-to-XML
+
+
+
+## [1.3.0]
+### Fixed
+11271 - NullPointerException if unit of measure is null
+11293 - `use="BUS"` for MR2009 id fields.
+11294 - Null Pointer exceptions thrown out of the Validate method
+11384 - MIF annotations on interactions not picked up when processing MIFv2s
+11385 - Interaction model has duplicated business name field
+11386 - MIFv1 annotations not processed properly - subtypes are missing
+11393 - Core Message Builder project tests fail when run with time zones other than EST
+
+
+## [1.2.9]
+### Fixed
+- 11239 - Re-generate SK API using v01r04.2 (hotfix2)
+  - We have discovered that there is an error in the previous releases of Infoway Message Builder SK API: the version of CeRX 4.3 used to generate the SK API distributed on the EMR & Integration Wiki (Hotfix 3) is different from the actual version in use by Saskatchewan (Hotfix 2). This error is now corrected in this release. For your convenience, attached "CeRx-EN-Release Notes - V01R04.3 - HOTFIX 3 - 20080814.pdf" is the change log for Hotfix 3. You may wish to review and determine whether this issue will impact you.
+  - Please replace your previous release of Message Builder SK API with this release and use SpecificationVersion.V01R04_2_SK instead of SpecificationVersion.V01R04_3_SK in your implementation code.
+- 11271 - Fixed NullPointerException when adding physical quanitities using MessageBuilder and the unit of measure is null
